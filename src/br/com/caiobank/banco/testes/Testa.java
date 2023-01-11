@@ -1,4 +1,10 @@
-package nubank;
+package br.com.caiobank.banco.testes;
+
+import br.com.caiobank.banco.modelos.Cliente;
+import br.com.caiobank.banco.modelos.ContaCorrente;
+import br.com.caiobank.banco.modelos.ContaPoupanca;
+import br.com.caiobank.banco.modelos.Endereco;
+import br.com.caiobank.banco.modelos.SaldoInsuficienteException;
 
 public class Testa {
 

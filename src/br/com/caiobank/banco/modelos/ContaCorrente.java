@@ -1,4 +1,4 @@
-package nubank;
+package br.com.caiobank.banco.modelos;
 
 public class ContaCorrente extends Conta {
 
