@@ -1,12 +1,34 @@
 package br.com.caiobank.banco.modelos;
 
+/**
+ * Classe que representa uma conta poupanca
+ * 
+ * @author Caio Pfaltzgarff
+ *
+ */
+
 public class ContaPoupanca extends Conta {
 	
 	private int totalDeTransferencias = 2;
 	
+	/**
+	 * Construtor para inicializar o objeto ContaCorrente a partir dos parametros
+	 * 
+	 * @param agencia
+	 * @param conta
+	 * @param titular
+	 */
+	
 	public ContaPoupanca(int agencia, int conta, Cliente titular) {
 		super(agencia, conta, titular);
 	}
+	
+	/**
+	 * Metodo saca sobrescrito que aplica taxa ao saque
+	 * 
+	 * @param valor
+	 * @throws SaldoInsuficienteException
+	 */
 	
 	@Override
 	public void saca(double valor) throws SaldoInsuficienteException {
@@ -22,6 +44,14 @@ public class ContaPoupanca extends Conta {
 		System.out.println("Saque de " + valor + "R$ efetuado!");
 		
 	}
+	
+	/**
+	 * Metodo transfere sobrescrito que aplica taxa ao passar do total de transferencias
+	 * 
+	 * @param valor
+	 * @param destino
+	 * @throws SaldoInsuficienteException
+	 */
 
 	@Override
 	public void transfere(double valor, Conta destino) throws SaldoInsuficienteException {
@@ -43,6 +73,12 @@ public class ContaPoupanca extends Conta {
 		
 	}
 	
+	/**
+	 * Verifica se resta transferencias gratuitas
+	 * 
+	 * @return boolean
+	 */
+	
 	private boolean verificaTotalTransferencia() {
 		
 		if(this.totalDeTransferencias >= 1) {
@@ -50,6 +86,14 @@ public class ContaPoupanca extends Conta {
 		}
 		return false;
 	}
+	
+	/**
+	 * Se nao possuir saldo, lança a exception
+	 * 
+	 * @param valor
+	 * @return
+	 * @throws SaldoInsuficienteException
+	 */
 	
 	private boolean verificaSaldo(double valor) throws SaldoInsuficienteException {
 		
@@ -59,6 +103,8 @@ public class ContaPoupanca extends Conta {
 		}
 		return true;
 	}
+	
+	//Getter
 	
 	public int getTotalDeTransferencias() {
 		return totalDeTransferencias;

@@ -32,6 +32,12 @@ public class Testa {
 		contaCorrenteCaio.transfere(2500, contaPoupancaCaio);
 		contaCorrenteRuan.transfere(2000, contaPoupancaRuan);
 		
+//		contaPoupancaCaio.transfere(500.0, contaPoupancaRuan);
+//		contaPoupancaCaio.transfere(500.0, contaPoupancaRuan);
+//		contaPoupancaCaio.transfere(500.0, contaPoupancaRuan);
+		
+		
+		
 		contaPoupancaCaio.transfere(2501.0, contaPoupancaRuan);
 		
 		System.out.println(contaPoupancaCaio.getSaldo());
