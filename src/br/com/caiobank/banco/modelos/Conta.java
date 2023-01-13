@@ -11,7 +11,7 @@ public abstract class Conta {
 
 	private int agencia;
 	private int numeroConta;
-	protected double saldo;
+	protected double saldo, taxaDeSaque, taxaDeTransferencia;
 	private Cliente titular;
 	
 	/**
@@ -39,16 +39,20 @@ public abstract class Conta {
 	}
 	
 	/**
-	 * Valor precisa ser maior do que o saldo.
+	 * Valor precisa ser maior do que o saldo e aplica a taxa de cada tipo de conta
 	 * 
 	 * @param valor
 	 * @throws SaldoInsuficienteException
 	 */
+	
 	public void saca(double valor) throws SaldoInsuficienteException {
-		if(this.saldo < valor) {
-			throw new SaldoInsuficienteException("Saldo atual: " + this.saldo + ", " + "Valor que deseja sacar: " + valor);
+		double valorComTaxa = valor + this.taxaDeSaque;
+		
+		if(this.saldo < valorComTaxa) {
+			throw new SaldoInsuficienteException("Saldo atual: " + this.saldo + ", " + "Valor necessário para sacar: " + valorComTaxa);
 		}
-		this.saldo -= valor;
+		
+		this.saldo -= valorComTaxa;
 	}
 	
 	/**
