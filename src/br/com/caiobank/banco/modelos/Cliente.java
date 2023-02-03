@@ -1,5 +1,7 @@
 package br.com.caiobank.banco.modelos;
 
+import java.util.ArrayList;
+
 /**
  * Classe que representa um cliente
  * 
@@ -10,9 +12,12 @@ package br.com.caiobank.banco.modelos;
 public class Cliente {
 
 	private String nome;
-	private int telefone;
+	private long telefone;
+	private short indice = 1;
 	private String cpf;
 	private Endereco endereco;
+	private ArrayList<Conta> contas = new ArrayList<>();
+	private GerenciadorDeTributos gerenciadorTributos = new GerenciadorDeTributos(this);
 	
 	/**
 	 * Construtor para inicializar o objeto Cliente a partir dos parametros
@@ -30,6 +35,21 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 	
+	/**
+	 * Mostra todas as contas que o cliente possui
+	 */
+	
+	public void mostraContas() {
+		if(this.contas.size() >= 1) {
+			System.out.println("Contas do " + this.nome.split(" ")[0] + ":");
+			contas.forEach((conta) -> System.out.println(indice++ + ") " + conta));
+			this.indice = 1; return;
+		}
+		System.out.println("Você não possui conta no nosso banco");
+	}
+	
+	
+	
 	//Getters e Setters
 	
 	public String getNome() {
@@ -41,7 +61,7 @@ public class Cliente {
 	public String getCpf() {
 		return cpf;
 	}
-	public int getTelefone() {
+	public long getTelefone() {
 		return telefone;
 	}
 	public void setTelefone(int telefone) {
@@ -52,6 +72,12 @@ public class Cliente {
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+	public ArrayList<Conta> getContas() {
+		return this.contas;
+	}
+	public GerenciadorDeTributos getGerenciadorTributos() {
+		return gerenciadorTributos;
 	}
 	
 }

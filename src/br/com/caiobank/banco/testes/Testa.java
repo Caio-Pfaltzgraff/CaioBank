@@ -4,11 +4,13 @@ import br.com.caiobank.banco.modelos.Cliente;
 import br.com.caiobank.banco.modelos.ContaCorrente;
 import br.com.caiobank.banco.modelos.ContaPoupanca;
 import br.com.caiobank.banco.modelos.Endereco;
+import br.com.caiobank.banco.modelos.GuardaContasCaiobank;
+import br.com.caiobank.banco.modelos.PagamentoInvalidoException;
 import br.com.caiobank.banco.modelos.SaldoInsuficienteException;
 
 public class Testa {
 
-	public static void main(String[] args) throws SaldoInsuficienteException {
+	public static void main(String[] args) throws SaldoInsuficienteException, PagamentoInvalidoException {
 		
 		Endereco enderecoCaio = new Endereco(26525037, "Nilópolis", 35, "Tv. Luiz Gonçalves Júnior");
 		Endereco enderecoRuan = new Endereco(26525046, "Nilópolis", 96, "Rua Helena");
@@ -32,6 +34,18 @@ public class Testa {
 //		contaPoupancaCaio.transfere(500.0, contaPoupancaRuan);
 //		contaPoupancaCaio.transfere(500.0, contaPoupancaRuan);
 //		contaPoupancaCaio.transfere(500.0, contaPoupancaRuan);
+		
+		GuardaContasCaiobank.mostraTodasContas();
+		System.out.println();
+		
+		caio.mostraContas();
+		System.out.println();
+		
+		System.out.println(caio.getGerenciadorTributos().getTotalDeTributos());
+		contaCorrenteCaio.pagaTotalDeTributos();
+		System.out.println(caio.getGerenciadorTributos().getTotalDeTributos());
+		
+		System.out.println("Tributos Ruan: " + ruan.getGerenciadorTributos().getTotalDeTributos());
 		
 		contaPoupancaCaio.transfere(2501.0, contaPoupancaRuan);
 		

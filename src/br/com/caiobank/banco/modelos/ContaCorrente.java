@@ -7,9 +7,10 @@ package br.com.caiobank.banco.modelos;
  *
  */
 
-public class ContaCorrente extends Conta {
+public class ContaCorrente extends Conta implements Tributavel {
 
 	private double faturaCartaoCredito;
+	private boolean tributoDestaContaFoiPago;
 	
 	/**
 	 * Construtor para inicializar o objeto ContaCorrente a partir dos parametros
@@ -21,8 +22,9 @@ public class ContaCorrente extends Conta {
 	
 	public ContaCorrente(int agencia, int conta, Cliente titular) {
 		super(agencia, conta, titular);
+		this.tipoDeConta = "Corrente";
 	}
-	
+
 	/**
 	 * Valida se possui limite para realizar o pagamento
 	 * 
@@ -72,9 +74,48 @@ public class ContaCorrente extends Conta {
 		this.faturaCartaoCredito -= valor;
 	}
 	
+	@Override
+	public double tributosDaConta() {
+		return 150.0;
+	}
+	
+	@Override
+	public void pagaTotalDeTributos() throws SaldoInsuficienteException, PagamentoInvalidoException {
+		if(this.getTitular().getGerenciadorTributos().todosOsTributosForamPagos() == false) {
+			this.saca(this.getTitular().getGerenciadorTributos().getTotalDeTributos());
+			this.getTitular().getGerenciadorTributos().recebeValorDosTributos(this.getTitular().getGerenciadorTributos().getTotalDeTributos());
+			return;
+		}
+		System.out.println("Todos seus Tributos já foram pagos");
+	}
+	
+	@Override
+	public void pagaTributo(Tributavel conta) throws SaldoInsuficienteException, PagamentoInvalidoException {
+		if(conta.isTributoDestaContaFoiPago() == false) {
+			this.saca(this.getTitular().getGerenciadorTributos().getTributo(conta));
+			this.getTitular().getGerenciadorTributos().recebeValorDeUmTributo(this.getTitular().getGerenciadorTributos().getTributo(conta), conta);
+			conta.setTributoDestaContaFoiPago(true);
+			return;
+		}
+		System.out.println("Tributo já foi pago");
+	}
+	
 	//Getter
 	
 	public double getFaturaCartaoCredito() {
 		return faturaCartaoCredito;
 	}
+
+	@Override
+	public boolean isTributoDestaContaFoiPago() {
+		return this.tributoDestaContaFoiPago;
+	}
+
+	@Override
+	public void setTributoDestaContaFoiPago(boolean tributoDestaContaFoiPago) {
+		this.tributoDestaContaFoiPago = tributoDestaContaFoiPago;
+	}
+
+	
+
 }

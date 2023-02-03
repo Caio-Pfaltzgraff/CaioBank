@@ -24,6 +24,7 @@ public class ContaPoupanca extends Conta {
 		super(agencia, conta, titular);
 		this.taxaDeSaque = 0.20;
 		this.taxaDeTransferencia = 1.0;
+		this.tipoDeConta = "Poupança";
 	}
 	
 	/**

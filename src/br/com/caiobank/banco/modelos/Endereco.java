@@ -31,7 +31,7 @@ public class Endereco {
 	}
 	
 	/**
-	 * Mostra o endereco
+	 * Mostra o endereco neste formato: nome da rua,numero,cidade
 	 * 
 	 * @return Rua + Número + Cidade
 	 */

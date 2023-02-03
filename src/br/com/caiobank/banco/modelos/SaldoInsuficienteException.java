@@ -10,7 +10,7 @@ package br.com.caiobank.banco.modelos;
 public class SaldoInsuficienteException extends Exception {
 	
 	/**
-	 * Construtor que Lança a mensagem da exception
+	 * Construtor que retorna a mensagem da Exception
 	 * 
 	 * @param msg
 	 */
